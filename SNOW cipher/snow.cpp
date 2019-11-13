@@ -1,29 +1,4 @@
-﻿/*
- * REFERENCE IMPLEMENTATION OF STREAM CIPHER SNOW 1.0
- *
- * Filename: snow.c
- *
- * Authors:
- * Patrik Ekdahl & Thomas Johansson
- * Dept. of Information Technology
- * P.O. Box 118
- * SE-221 00 Lund, Sweden,
- * email: {patrik,thomas}@it.lth.se
- *
- * Synopsis:
- *  This file contains functions that implement the
- *  stream cipher SNOW. At all time, the cipher is
- *  clocked directly after a running key has been read out.
- *  This means that between consecutive calls to snow_runningkey()
- *  the cipher will already be clocked and the next running key
- *  word is "outfrom_fsm^*(ptr+S16)"
- *
- *  Interface: Two functions are declared as external, snow_loadkey and snow_keystream.
- *     Check snow.h for calling conventions. Each program using snow.c should
- *     use snow.h as header.
- */
-
-#include "snow.h"
+﻿#include "snow.h"
 #include "snowtab.h"
 
 
@@ -35,7 +10,7 @@
   * The register is taped on t^1 down to the blender.
   *
   */
-#define highbit 0x80000000
+#define highbit	 0x80000000
 #define alphaxor 0x20108403
 #define LFSRLEN  16
 #define S1       1

@@ -1,19 +1,3 @@
-/*
- * REFERENCE IMPLEMENTATION OF STREAM CIPHER SNOW 1.0
- *
- * Filename: testvectors.c
- *
- * Authors:
- * Patrik Ekdahl & Thomas Johansson
- * Dept. of Information Technology
- * P.O. Box 118
- * SE-221 00 Lund, Sweden,
- * email: {patrik,thomas}@it.lth.se
- *
- * Synopsis:
- *    Generates testvectors from the reference implementation of SNOW 1.0.
- *
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,10 +15,8 @@
 		} while (0)
 
 
-
 typedef unsigned long u32;
 typedef unsigned char u8;
-
 
 
 void print_data(const char* str, u8* val, int len)
@@ -49,6 +31,7 @@ void print_data(const char* str, u8* val, int len)
 		putchar(hex[(val[i] >> 4) & 0xF]);
 		putchar(hex[(val[i]) & 0xF]);
 	}
+
 	putchar('\n');
 }
 
@@ -60,17 +43,17 @@ void testvectors()
 	u8 keystream[4];
 	u32 IV1, IV2;
 
-	/*
-	 * 128 bits key
-	 */
+	
+	// 128-битный ключ
 	printf("Test vectors for SNOW 1.0, 128 bit key, standard mode\n");
 	printf("Each key is given in bigendian format (MSB...LSB) in hexadecimal\n");
 	printf("==================\n\n");
+
 	IV1 = IV2 = 0;
 	memset(key, 0, 16);
 	key[0] = 0x80;
 	snow_loadkey(key, 128, STANDARD_MODE, IV2, IV1);
-	//  printf("        (IV2,IV1)=(%lu,%lu)\n",IV2,IV1);
+	printf("        (IV2,IV1)=(%lu,%lu)\n",IV2,IV1);
 	print_data("key", key, 16);
 	printf("Keystream output 1...16:\n");
 	for (i = 0; i < 0x10; i++) {
@@ -78,6 +61,7 @@ void testvectors()
 		print_data("keystream", keystream, 4);
 	}
 	printf("==================\n\n");
+
 	IV1 = IV2 = 0;
 	memset(key, 0xaa, 16);
 	snow_loadkey(key, 128, STANDARD_MODE, IV2, IV1);
@@ -89,6 +73,7 @@ void testvectors()
 		print_data("keystream", keystream, 4);
 	}
 	printf("=========== End of test vectors =========\n\n");
+
 
 	printf("Test vectors for SNOW 1.0, 128 bit key, IV mode\n");
 	printf("Each key is given in bigendian format (MSB...LSB) in hexadecimal\n");
@@ -119,9 +104,8 @@ void testvectors()
 	}
 	printf("=========== End of test vectors =========\n\n");
 
-	/*
-	 * 256 bits key
-	 */
+
+	// 256-битный ключ
 	printf("Test vectors for SNOW 1.0, 256 bit key, standard mode\n");
 	printf("Each key is given in bigendian format (MSB...LSB) in hexadecimal\n");
 	printf("==================\n\n");
@@ -129,7 +113,7 @@ void testvectors()
 	memset(key, 0, 32);
 	key[0] = 0x80;
 	snow_loadkey(key, 256, STANDARD_MODE, IV2, IV1);
-	//  printf("        (IV2,IV1)=(%lu,%lu)\n",IV2,IV1);
+	printf("        (IV2,IV1)=(%lu,%lu)\n",IV2,IV1);
 	print_data("key", key, 32);
 	printf("Keystream output 1...16:\n");
 	for (i = 0; i < 0x10; i++) {
@@ -177,16 +161,10 @@ void testvectors()
 		print_data("keystream", keystream, 4);
 	}
 	printf("=========== End of test vectors =========\n\n");
-
-
 }
 
 
-
-
-int main(int argc, char** argv)
-{
-	printf("REFERENCE IMPLEMENTATION\n");
+int main() {
 	testvectors();
-	return(0);
+	return 0;
 }
