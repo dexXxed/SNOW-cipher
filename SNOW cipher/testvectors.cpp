@@ -37,11 +37,11 @@ typedef unsigned char u8;
 
 
 
-void print_data(char* str, u8* val, int len)
+void print_data(const char* str, u8* val, int len)
 {
 	int i;
 
-	static char* hex = "0123456789ABCDEF";
+	const char* hex = "0123456789ABCDEF";
 
 	printf("%25s=", str);
 
